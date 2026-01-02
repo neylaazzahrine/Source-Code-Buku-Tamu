@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Buku Tamu</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>Dashboard Admin</h1>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </header>
+
+        <div id="loginForm" class="login-form">
+            <h2>Login Admin</h2>
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button id="loginBtn">Login</button>
+            <div id="loginNotification" class="notification"></div>
+        </div>
+
+        <div id="dashboard" class="dashboard" style="display: none;">
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Total Tamu</h3>
+                    <p id="totalGuests">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Orang Hadir</h3>
+                    <p id="totalAttendance">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Keluarga</h3>
+                    <p id="familyCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Teman</h3>
+                    <p id="friendCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Rekan Kerja</h3>
+                    <p id="colleagueCount">0</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+            </div>
+
+            <div class="controls">
+                <input type="text" id="searchInput" placeholder="Cari nama tamu...">
+                <select id="filterCategory">
+                    <option value="">Semua Kategori</option>
+                    <option value="keluarga">Keluarga</option>
+                    <option value="teman">Teman</option>
+                    <option value="rekan kerja">Rekan Kerja</option>
+                </select>
+                <select id="sortBy">
+                    <option value="created_at">Waktu</option>
+                    <option value="name">Nama</option>
+                    <option value="attendance_count">Jumlah Hadir</option>
+                </select>
+                <button id="exportExcel">Export Excel</button>
+                <button id="exportPDF">Export PDF</button>
+            </div>
+
+            <table id="guestsTable">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Kategori</th>
+                        <th>Pesan</th>
+                        <th>Jumlah Hadir</th>
+                        <th>Waktu</th>
+                    </tr>
+                </thead>
+                <tbody id="guestsTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+    <script src="admin.js"></script>
+</body>
+</html>
